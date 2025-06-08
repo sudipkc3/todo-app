@@ -1,3 +1,4 @@
+// Import necessary libraries and components
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Checkbox } from "expo-checkbox";
@@ -18,12 +19,15 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+// Define the structure of a Todo item
+// Each todo has an id, title, and a boolean indicating if it's done
 type TodoType = {
   id: number;
   title: string;
   isDone: boolean;
 };
 
+// Define color constants for consistent styling
 const colors = {
   primary: "#c737ff",
   primaryDark: "#b911ff",
@@ -36,13 +40,17 @@ const colors = {
 };
 
 export default function Index() {
+  // Initialize router for navigation
   const router = useRouter();
+
+  // State variables for managing todos, input text, search query, and menu visibility
   const [todos, setTodos] = useState<TodoType[]>([]);
   const [todoText, setTodoText] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [oldtodos, setOldTodos] = useState<TodoType[]>([]);
   const [isMenuVisible, setIsMenuVisible] = useState(false);
 
+  // Fetch todos from AsyncStorage when the component mounts
   useEffect(() => {
     const getTodos = async () => {
       try {
@@ -58,6 +66,7 @@ export default function Index() {
     getTodos();
   }, []);
 
+  // Add a new todo to the list and save it to AsyncStorage
   const addTodo = async () => {
     if (!todoText.trim()) {
       alert("Please enter a task name.");
@@ -65,7 +74,7 @@ export default function Index() {
     }
     try {
       const newTodo = {
-        id: Math.random(),
+        id: Math.floor(Math.random() * 999) + 1, // Generate id between 1 and 999
         title: todoText,
         isDone: false,
       };
@@ -80,6 +89,7 @@ export default function Index() {
     }
   };
 
+  // Delete a todo by its id and update AsyncStorage
   const deleteTodo = async (id: number) => {
     try {
       const newTodos = todos.filter((todo) => todo.id !== id);
@@ -91,6 +101,7 @@ export default function Index() {
     }
   };
 
+  // Toggle the completion status of a todo and update AsyncStorage
   const handleDone = async (id: number) => {
     try {
       const newTodos = todos.map((todo) => {
@@ -107,6 +118,7 @@ export default function Index() {
     }
   };
 
+  // Filter todos based on the search query
   const onSearch = React.useCallback(
     (query: string) => {
       if (query === "") {
@@ -121,12 +133,14 @@ export default function Index() {
     [todos, oldtodos]
   );
 
+  // Update the displayed todos whenever the search query changes
   useEffect(() => {
     onSearch(searchQuery);
   }, [searchQuery, onSearch]);
 
   return (
     <SafeAreaView style={styles.container}>
+      {/* Header section with menu and logo */}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => setIsMenuVisible(true)}>
           <Ionicons name="menu" size={24} color={colors.text} />
@@ -139,6 +153,7 @@ export default function Index() {
         </TouchableOpacity>
       </View>
 
+      {/* Modal for navigation menu */}
       <Modal
         visible={isMenuVisible}
         transparent={true}
@@ -170,6 +185,7 @@ export default function Index() {
         </View>
       </Modal>
 
+      {/* Search bar for filtering todos */}
       <View style={styles.searchBar}>
         <Ionicons name="search" size={24} color={colors.text} />
         <TextInput
@@ -181,6 +197,7 @@ export default function Index() {
         />
       </View>
 
+      {/* List of todos */}
       <FlatList
         data={[...todos].reverse()}
         keyExtractor={(item) => item.id.toString()}
@@ -192,6 +209,8 @@ export default function Index() {
           />
         )}
       />
+
+      {/* Input and button for adding new todos */}
       <KeyboardAvoidingView
         style={styles.footer}
         behavior="padding"
@@ -212,6 +231,7 @@ export default function Index() {
   );
 }
 
+// Component for rendering individual todo items
 const TodoItem = ({
   todo,
   deleteTodo,
@@ -248,6 +268,7 @@ const TodoItem = ({
   );
 };
 
+// Styles for the components
 const styles = StyleSheet.create({
   container: {
     flex: 1,
