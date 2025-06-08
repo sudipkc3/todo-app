@@ -1,50 +1,106 @@
-# Welcome to your Expo app 👋
+# Todo App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This is a simple Todo application built using React Native and Expo. The app allows users to manage their tasks by adding, deleting, marking them as done, and searching through the list of tasks. The app uses `AsyncStorage` for local data persistence.
 
-## Get started
+## Features
 
-1. Install dependencies
+- Add new tasks to the todo list.
+- Mark tasks as done or undone.
+- Delete tasks from the list.
+- Search tasks by title.
+- Persistent storage using `AsyncStorage`.
+
+## Prerequisites
+
+Before running the app, ensure you have the following installed:
+
+- [Node.js](https://nodejs.org/) (LTS version recommended)
+- [Expo CLI](https://docs.expo.dev/get-started/installation/)
+- A code editor like [Visual Studio Code](https://code.visualstudio.com/)
+
+## Installation
+
+1. Clone the repository or download the source code.
+
+   ```bash
+   git clone <repository-url>
+   cd todo-app
+   ```
+
+2. Install the dependencies:
 
    ```bash
    npm install
    ```
 
-2. Start the app
+## Running the App
+
+1. Start the Expo development server:
 
    ```bash
-   npx expo start
+   npm start
    ```
 
-In the output, you'll find options to open the app in a
+2. Follow the instructions in the terminal to open the app:
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+   - Use the Expo Go app on your physical device (scan the QR code).
+   - Use an Android emulator or iOS simulator.
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+### Running on Specific Platforms
 
-## Get a fresh project
+- **Android**:
 
-When you're ready, run:
+  ```bash
+  npm run android
+  ```
 
-```bash
-npm run reset-project
-```
+- **iOS**:
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+  ```bash
+  npm run ios
+  ```
 
-## Learn more
+- **Web**:
 
-To learn more about developing your project with Expo, look at the following resources:
+  ```bash
+  npm run web
+  ```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Exporting the App
 
-## Join the community
+### Exporting to APK (Android)
 
-Join our community of developers creating universal apps.
+1. Build the APK using Expo:
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+   ```bash
+   npx expo build:android
+   ```
+
+2. Follow the instructions to download the APK file.
+
+### Exporting to IPA (iOS)
+
+1. Build the IPA using Expo:
+
+   ```bash
+   npx expo build:ios
+   ```
+
+2. Follow the instructions to download the IPA file.
+
+## Project Structure
+
+- `app/index.tsx`: Main entry point of the app.
+- `assets/`: Contains images and fonts used in the app.
+- `scripts/reset-project.js`: Script to reset the project.
+
+## Learn More
+
+To learn more about developing with Expo and React Native, check out the following resources:
+
+- [Expo Documentation](https://docs.expo.dev/)
+- [React Native Documentation](https://reactnative.dev/)
+
+## License
+
+This project is licensed under the MIT License.

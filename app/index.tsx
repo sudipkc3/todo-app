@@ -44,6 +44,10 @@ export default function Index() {
   }, []);
 
   const addTodo = async () => {
+    if (!todoText.trim()) {
+      alert("Please enter a task name.");
+      return;
+    }
     try {
       const newTodo = {
         id: Math.random(),
@@ -88,20 +92,23 @@ export default function Index() {
     }
   };
 
-  const onSearch = (query: string) => {
-    if (query == "") {
-      setTodos(oldtodos);
-    } else {
-      const filteredTodos = todos.filter((todo) =>
-        todo.title.toLowerCase().includes(query.toLowerCase())
-      );
-      setTodos(filteredTodos);
-    }
-  };
+  const onSearch = React.useCallback(
+    (query: string) => {
+      if (query === "") {
+        setTodos(oldtodos);
+      } else {
+        const filteredTodos = todos.filter((todo) =>
+          todo.title.toLowerCase().includes(query.toLowerCase())
+        );
+        setTodos(filteredTodos);
+      }
+    },
+    [todos, oldtodos]
+  );
 
   useEffect(() => {
     onSearch(searchQuery);
-  }, [searchQuery]);
+  }, [searchQuery, onSearch]);
 
   return (
     <SafeAreaView style={styles.container}>
