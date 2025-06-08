@@ -217,7 +217,7 @@ export default function Index() {
         keyboardVerticalOffset={10}
       >
         <TextInput
-          placeholder="Add new ToDO"
+          placeholder="Add new ToDo"
           value={todoText}
           onChangeText={(text) => setTodoText(text)}
           style={styles.newTodoInput}
